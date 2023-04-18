@@ -1,0 +1,19 @@
+.addevent {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    &__box {
+        margin-top: 0.4em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &-calendar {
+            margin-top: 0.8em;
+        }
+    }
+}
+
+h1 {
+    text-align: center;
+}
