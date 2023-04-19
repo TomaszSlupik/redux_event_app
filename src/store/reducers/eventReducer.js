@@ -1,7 +1,8 @@
-import { SET_EVENTS } from "../consts";
+import { SET_EVENTS, SET_CALENDAR } from "../consts";
 
 const initstate = {
-    event_name: "Testujemy Reducer"
+    event_name: "",
+    event_calendar: ""
 }
 
 export const eventReducer = (state=initstate, action) => {
@@ -10,6 +11,11 @@ export const eventReducer = (state=initstate, action) => {
             return {
                 ...state, 
                 event_name: action.payload.event
+            }
+        case SET_CALENDAR:
+            return {
+                ...state, 
+                event_calendar: action.payload.data
             }
         default:
             return state

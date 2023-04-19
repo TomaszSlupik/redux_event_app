@@ -1,4 +1,4 @@
-.addevent {
+.editevent {
     position: relative;
     width: 100vw;
     height: 100%;
@@ -8,12 +8,5 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        &-calendar {
-            margin-top: 0.8em;
-        }
     }
-}
-
-h1 {
-    text-align: center;
 }

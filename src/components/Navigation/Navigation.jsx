@@ -5,6 +5,8 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import EventIcon from '@mui/icons-material/Event';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { Link } from 'react-router-dom';
 
 export default function Navigation() {
@@ -40,6 +42,24 @@ export default function Navigation() {
         >
             <BottomNavigationAction label="Home" icon={<EventIcon />} />
             <div className='navigation__box-text'>Events</div>
+        </Link>
+        </div>
+
+        <div className="navigation__box">
+        <Link to="/edit"
+        style={style.link}
+        >
+            <BottomNavigationAction label="Home" icon={<EditCalendarIcon />} />
+            <div className='navigation__box-text'>Edycja</div>
+        </Link>
+        </div>
+
+        <div className="navigation__box">
+        <Link to="/delete"
+        style={style.link}
+        >
+            <BottomNavigationAction label="Home" icon={<DeleteSweepIcon />} />
+            <div className='navigation__box-text'>Usuwanie</div>
         </Link>
         </div>
       </BottomNavigation>
