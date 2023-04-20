@@ -33,7 +33,6 @@ export default function Addevent() {
     }
     dispatch(setEvents([...events, newEvent]))
     dispatch(setCalendar([...calendar, fieldCalendar.toString()]))
-    console.log(`${fieldCalendar}`)
   }
 
 

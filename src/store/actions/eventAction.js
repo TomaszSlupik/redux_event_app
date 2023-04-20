@@ -1,4 +1,4 @@
-import { SET_EVENTS, SET_CALENDAR } from "../consts";
+import { SET_EVENTS, SET_CALENDAR, EDIT_EVENT } from "../consts";
 
 export const setEvents = (event) => {
     return {
@@ -14,6 +14,16 @@ export const setCalendar = (data) => {
         type: SET_CALENDAR,
         payload: {
             data
+        }
+    }
+}
+
+export const setEditEvent = (currentName, newName) => {
+    return {
+        type: EDIT_EVENT,
+        payload: {
+            currentName, 
+            newName
         }
     }
 }

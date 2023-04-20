@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import './Events.scss'
-import { Title } from '../../style/mystyle'
+import { Noevent, Title } from '../../style/mystyle'
 import { Paper } from '@mui/material'
 
 export default function Events() {
@@ -15,25 +15,20 @@ export default function Events() {
       <Title>Twoje Eventy</Title>
       
       <Paper elevation={3} style={{position: 'relative',width: '80%', minHeight: '300px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            Event:
             {event === ""
             ?
-            <div>Brak wydarzenia</div>
+            <Noevent>Brak wydarzenia</Noevent>
             :
             (
-              <div>{event}</div>
+              <div>{event.map((el, index) => {
+                return (
+                  <div key={index}>
+                    {el.event_name}
+                  </div>
+                )
+              })}</div>
             )
             } 
-            
-            data: 
-            {calendar === ""
-            ? 
-            <div>Brak wydarzenia</div>
-            :
-            (
-              <div>{calendar}</div>
-            )  
-          }
       </Paper>
       </div>
     </div>
