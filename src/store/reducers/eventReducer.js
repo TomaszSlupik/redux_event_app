@@ -1,4 +1,4 @@
-import { SET_EVENTS, SET_CALENDAR, EDIT_EVENT } from "../consts";
+import { SET_EVENTS, SET_CALENDAR, EDIT_EVENT, DELETE_EVENT } from "../consts";
 
 const initstate = {
     event_name: "",
@@ -30,6 +30,14 @@ export const eventReducer = (state=initstate, action) => {
                     else {
                         return event
                     }
+                })
+            }
+        case DELETE_EVENT:
+            const {eventDelete} = action.payload
+            return {
+                ...state, 
+                event_name: state.event_name.filter((el) => {
+                    return el.event_name !== eventDelete
                 })
             }
         default:

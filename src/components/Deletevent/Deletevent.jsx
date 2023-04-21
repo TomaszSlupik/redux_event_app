@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Noevent, Title } from '../../style/mystyle'
 import { Paper } from '@mui/material'
 import './Deletevent.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { setDeleteEvent } from '../../store/actions/eventAction'
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -29,13 +30,13 @@ export default function Deletevent() {
     bgcolor: 'background.paper',
   };
 
-  const [deleteEvent, setDeleteEvent] = useState()
+  const [deleteEventInput, setDeleteEventInput] = useState()
   const [openWindow, setOpenWindow] = useState(false)
 
   const event = useSelector(state => state.event_name)
 
   const handleOpenEvent = (el) => {
-      setDeleteEvent(el)
+      setDeleteEventInput(el)
       setOpenWindow(true)
   }
 
@@ -43,8 +44,13 @@ export default function Deletevent() {
     setOpenWindow(false)
   }
 
+
+  const dispatch = useDispatch()
+
   const handlerAcceptDelete = () => {
     setOpenWindow(false)
+    dispatch(setDeleteEvent(deleteEventInput))
+    console.log(deleteEventInput)
   }
 
   return (
@@ -82,7 +88,7 @@ export default function Deletevent() {
                         <DialogTitle>{`Czy chcesz usunąć wydarzenie?`}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                          <div>{deleteEvent}</div>
+                          <div>{deleteEventInput}</div>
                         </DialogContentText>
                         </DialogContent>
                         <DialogActions>
