@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Addevent.scss'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
@@ -10,17 +10,18 @@ import Stack from '@mui/material/Stack';
 import { setEvents, setCalendar } from '../../store/actions/eventAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Title } from '../../style/mystyle';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function Addevent() {
 
-  const moment = require('moment');
-  const today = moment();
-  
-
   const [fieldEvent, setFieldEvent] = useState("")
-  const [fieldCalendar, setFieldCalendar] = useState()
+  const [fieldCalendar, setFieldCalendar] = useState("")
 
 
   const events = useSelector(state => state.event_name)
@@ -28,13 +29,23 @@ export default function Addevent() {
   const dispatch = useDispatch()
 
   const handlerAddEvent = () => {
-    const newEvent = {
-      event_name: fieldEvent
+    setOpenSnackbar(true)
+    console.log(fieldCalendar)
+
+    if (fieldEvent !== "" || fieldCalendar !== "") {
+      const newEvent = {
+        event_name: fieldEvent
+      }
+      dispatch(setEvents([...events, newEvent]))
+      dispatch(setCalendar([...calendar, fieldCalendar.toString()]))
     }
-    dispatch(setEvents([...events, newEvent]))
-    dispatch(setCalendar([...calendar, fieldCalendar.toString()]))
   }
 
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+
+  const handlerClose = () => {
+    setOpenSnackbar(false)
+  }
 
   return (
     <div className='addevent'>
@@ -69,6 +80,29 @@ export default function Addevent() {
                 variant='contained'
                 >Dodaj</Button>
             </Paper>
+
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handlerClose}>
+              {
+                fieldEvent === "" || fieldCalendar === "" ?
+                (
+                  <Alert onClose={handlerClose} 
+                  severity="error" 
+                  sx={{ width: '100%' }}>
+                    Wypełnij poprawnie formularz
+                  </Alert>
+                )
+                :
+                (
+                  <Alert onClose={handlerClose} 
+                  severity="success" 
+                  sx={{ width: '100%' }}>
+                    Twój event został dodany.
+                  </Alert>
+                )
+              }
+
+            
+            </Snackbar>
         </div>
     </div>
   )

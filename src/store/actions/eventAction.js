@@ -1,5 +1,6 @@
 import { SET_EVENTS, SET_CALENDAR, EDIT_EVENT, DELETE_EVENT } from "../consts";
 
+
 export const setEvents = (event) => {
     return {
         type: SET_EVENTS,
